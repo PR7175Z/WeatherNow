@@ -16,6 +16,7 @@ async function apicall(apikey){
 }
 
 document.addEventListener('DOMContentLoaded', async ()=>{
+    const icon = document.querySelector('.icon img');
     let val = await geolocation();
     // let cityname = val.city;
     let lat = val.latitude;
@@ -26,5 +27,7 @@ document.addEventListener('DOMContentLoaded', async ()=>{
     console.log(val.longitude);
     let apival = await apicall(apikey);
     console.log(JSON.stringify(apival, null, 2));
-    document.getElementById('viewport').innerHTML = apival.current.temp_c;
+    console.log(apival.location.localtime);
+    icon.setAttribute('src', apival.forecast.forecastday[0].day.condition.icon);
+    // document.getElementById('viewport').innerHTML = apival.current.temp_c;
 })
