@@ -17,17 +17,31 @@ async function apicall(apikey){
 
 document.addEventListener('DOMContentLoaded', async ()=>{
     const icon = document.querySelector('.icon img');
+    const temp_C = document.querySelector('.temp .temp_c');
+    const temp_f = document.querySelector('.temp .temp_f');
+    const localtime = document.querySelector('.time .localtime');
+    const weathertxt = document.querySelector('.weathertext');
+    const humidity = document.querySelector('.humidity');
+    const windSpeed = document.querySelector('.windspeed');
+    const pressure = document.querySelector('.pressure');
+    const uv = document.querySelector('.uv');
+
     let val = await geolocation();
-    // let cityname = val.city;
     let lat = val.latitude;
     let long = val.longitude;
-    // console.log(val);
+
     const apikey = `https://api.weatherapi.com/v1/forecast.json?key=${key}&q=${lat}, ${long}`;
-    console.log(val.latitude);
-    console.log(val.longitude);
     let apival = await apicall(apikey);
+
     console.log(JSON.stringify(apival, null, 2));
     console.log(apival.location.localtime);
-    icon.setAttribute('src', apival.forecast.forecastday[0].day.condition.icon);
-    // document.getElementById('viewport').innerHTML = apival.current.temp_c;
+    icon.setAttribute('src', apival.current.condition.icon);
+    temp_C.innerHTML = apival.current.temp_c + '<sup>o</sup>C';
+    temp_f.innerHTML = apival.current.temp_f + '<sup>o</sup>F';
+    localtime.innerHTML = apival.location.localtime;
+    weathertxt.innerHTML = apival.current.condition.text;
+    humidity.innerHTML = 'Humidity: ' + apival.current.humidity + 'g/m<sup>3</sup>';
+    windSpeed.innerHTML = 'Wind Speed: ' + apival.current.wind_kph + ' Km/h';
+    pressure.innerHTML = 'Pressure: ' + apival.current.pressure_mb + ' Millibar';
+    uv.innerHTML = 'UV: ' + apival.current.uv + 'mW/cm<sup>2</sup>';
 })
