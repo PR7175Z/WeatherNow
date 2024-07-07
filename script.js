@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', async ()=>{
     const windSpeed = document.querySelector('.windspeed');
     const pressure = document.querySelector('.pressure');
     const uv = document.querySelector('.uv');
+    const forecast = document.querySelector('.forecast-wrap');
 
     let val = await geolocation();
     let lat = val.latitude;
@@ -33,8 +34,8 @@ document.addEventListener('DOMContentLoaded', async ()=>{
     const apikey = `https://api.weatherapi.com/v1/forecast.json?key=${key}&q=${lat}, ${long}`;
     let apival = await apicall(apikey);
 
-    console.log(JSON.stringify(apival, null, 2));
-    console.log(apival.location.localtime);
+    // console.log(JSON.stringify(apival, null, 2));
+    // console.log(apival.location.localtime);
     icon.setAttribute('src', apival.current.condition.icon);
     temp_C.innerHTML = apival.current.temp_c + '<sup>o</sup>C';
     temp_f.innerHTML = apival.current.temp_f + '<sup>o</sup>F';
@@ -44,4 +45,17 @@ document.addEventListener('DOMContentLoaded', async ()=>{
     windSpeed.innerHTML = 'Wind Speed: ' + apival.current.wind_kph + ' Km/h';
     pressure.innerHTML = 'Pressure: ' + apival.current.pressure_mb + ' Millibar';
     uv.innerHTML = 'UV: ' + apival.current.uv + 'mW/cm<sup>2</sup>';
+
+    // console.log(apival.forecast.forecastday[0].hour.length);
+
+    for(let i = 0; i<apival.forecast.forecastday[0].hour.length; i = i + 4){
+        forecast.append(document.createElement('div'));
+    }
+
+    let h = 0;
+    let arr = Array.from(forecast.children);
+    arr.forEach((element) => {
+        element.innerHTML = '<img src="'+apival.forecast.forecastday[0].hour[h].condition.icon + '" alt="'+ apival.forecast.forecastday[0].hour[h].condition.text +'">';
+        h = h+4;
+    })
 })
