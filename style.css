@@ -1,0 +1,30 @@
+body{
+    background: #03045e;
+}
+
+.container{
+    width: 800px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.today-forecast{
+    background: #0077b6;
+    padding: 40px;
+    border-radius: 10px;
+    color: #fff;
+}
+
+.weathercon .icon, .weathertext{
+    display: inline-block;
+}
+
+.forecast-wrap div{
+    display: inline-block;
+    padding-right: 10px;
+    color: #fff;
+}
+
+.forecast-wrap div img{
+    display: block;
+}

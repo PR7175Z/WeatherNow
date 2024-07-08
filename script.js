@@ -55,7 +55,10 @@ document.addEventListener('DOMContentLoaded', async ()=>{
     let h = 0;
     let arr = Array.from(forecast.children);
     arr.forEach((element) => {
+        console.log(apival.forecast.forecastday[0].hour[h]);
         element.innerHTML = '<img src="'+apival.forecast.forecastday[0].hour[h].condition.icon + '" alt="'+ apival.forecast.forecastday[0].hour[h].condition.text +'">';
+        element.append(apival.forecast.forecastday[0].hour[h].condition.text);
+        element.append(apival.forecast.forecastday[0].hour[h].time);
         h = h+4;
     })
 })
