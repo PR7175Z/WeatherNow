@@ -26,6 +26,8 @@ document.addEventListener('DOMContentLoaded', async ()=>{
     const pressure = document.querySelector('.pressure');
     const uv = document.querySelector('.uv');
     const forecast = document.querySelector('.forecast-wrap');
+    const cel = document.querySelector('.cel');
+    const freh = document.querySelector('.freh');
 
     let val = await geolocation();
     let lat = val.latitude;
@@ -39,7 +41,7 @@ document.addEventListener('DOMContentLoaded', async ()=>{
     icon.setAttribute('src', apival.current.condition.icon);
     temp_C.innerHTML = apival.current.temp_c + '<sup>o</sup>C';
     temp_f.innerHTML = apival.current.temp_f + '<sup>o</sup>F';
-    localtime.innerHTML = apival.location.localtime;
+    localtime.innerHTML = apival.location.localtime.split(" ")[0] + "<br>" + apival.location.localtime.split(" ")[1];
     weathertxt.innerHTML = apival.current.condition.text;
     humidity.innerHTML = 'Humidity: ' + apival.current.humidity + 'g/m<sup>3</sup>';
     windSpeed.innerHTML = 'Wind Speed: ' + apival.current.wind_kph + ' Km/h';
@@ -58,7 +60,17 @@ document.addEventListener('DOMContentLoaded', async ()=>{
         console.log(apival.forecast.forecastday[0].hour[h]);
         element.innerHTML = '<img src="'+apival.forecast.forecastday[0].hour[h].condition.icon + '" alt="'+ apival.forecast.forecastday[0].hour[h].condition.text +'">';
         element.append(apival.forecast.forecastday[0].hour[h].condition.text);
-        element.append(apival.forecast.forecastday[0].hour[h].time);
+        element.prepend(apival.forecast.forecastday[0].hour[h].time.split(" ")[1]);
         h = h+4;
+    })
+
+    freh.addEventListener('click',()=>{
+        temp_f.style.display = "block";
+        temp_C.style.display = 'none';
+    })
+
+    cel.addEventListener('click',()=>{
+        temp_f.style.display = "none";
+        temp_C.style.display = 'block';
     })
 })
