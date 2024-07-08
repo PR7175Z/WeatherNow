@@ -28,3 +28,21 @@ body{
 .forecast-wrap div img{
     display: block;
 }
+
+.left div{
+    display: inline-block;
+}
+
+.left .btn-temp{
+    display: block;
+}
+
+.temp{
+    font-size: 30px;
+}
+
+.today-forecast {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
