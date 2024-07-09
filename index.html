@@ -4,21 +4,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Weather Forecast</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="css/all.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-    <!-- <section class="weather-form">
-        <div class="container">
-            <div clas="form-wrapper">
-                <form id="weatherform">
-                    <input>
-                </form>
-            </div>
-        </div>
-    </section> -->
     <div id="viewport">
         <div class="container">
             <div class="view-wrapper">
+                <div class="section-heading">
+                    <h1>Weather Now</h1>
+                </div>
                 <div class="today-forecast">
                     <div class="left">
                         <div class="weathercon">
@@ -37,7 +32,10 @@
                     </div>
                     <div class="right">
                         <div class="time">
-                            <div class="localtime"></div>
+                            <div class="localtime">
+                                <div class="date"></div>
+                                <div class="time"></div>
+                            </div>
                         </div>
                         <div class="windcondition">
                             <div class="windspeed"></div>
@@ -47,7 +45,6 @@
                         </div>
                     </div>
                 </div>
-                <br><br>
 
                 <div class="today-wholeday-forecast">
                     <div class="forecast-wrap"></div>
