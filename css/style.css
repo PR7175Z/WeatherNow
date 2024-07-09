@@ -1,0 +1,68 @@
+body{
+    background: #03045e;
+    font-family: 'poppins';
+    font-size: 12px;
+    color: #fff;
+}
+
+.container{
+    width: 800px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.today-forecast{
+    background: #0077b6;
+    padding: 40px;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 40px;
+}
+
+.weathercon .icon, .weathertext{
+    display: inline-block;
+}
+
+.forecast-wrap div{
+    display: inline-block;
+    padding: 0 25px 0 0;
+    color: #fff;
+    text-align: center;
+}
+
+.forecast-wrap div img{
+    display: block;
+    margin: 0 auto;
+}
+
+.left div{
+    display: inline-block;
+}
+
+.left .icon{
+    display: block;
+}
+
+.left .btn-temp{
+    display: block;
+    cursor: pointer;
+}
+
+.temp{
+    font-size: 20px;
+}
+
+.freh{
+    color:#c7aaaa;
+}
+
+.today-forecast {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.localtime{
+    margin-bottom: 20px;
+}
