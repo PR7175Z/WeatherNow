@@ -33,12 +33,21 @@ body{
     display: inline-block;
 }
 
+.left .icon{
+    display: block;
+}
+
 .left .btn-temp{
     display: block;
+    cursor: pointer;
 }
 
 .temp{
     font-size: 30px;
+}
+
+.freh{
+    color:#777;
 }
 
 .today-forecast {
