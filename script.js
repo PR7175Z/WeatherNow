@@ -19,7 +19,8 @@ document.addEventListener('DOMContentLoaded', async ()=>{
     const icon = document.querySelector('.icon img');
     const temp_C = document.querySelector('.temp .temp_c');
     const temp_f = document.querySelector('.temp .temp_f');
-    const localtime = document.querySelector('.time .localtime');
+    const localdate = document.querySelector('.time .localtime .date');
+    const localtime = document.querySelector('.time .localtime .time');
     const weathertxt = document.querySelector('.weathertext');
     const humidity = document.querySelector('.humidity');
     const windSpeed = document.querySelector('.windspeed');
@@ -35,13 +36,13 @@ document.addEventListener('DOMContentLoaded', async ()=>{
 
     const apikey = `https://api.weatherapi.com/v1/forecast.json?key=${key}&q=${lat},${long}`;
     let apival = await apicall(apikey);
-    // console.log(apival.location.localtime);
 
-    function showval(jsonval){
+    function showval(jsonval, date = 'localdate', time = 'localtime'){
         icon.setAttribute('src', jsonval.condition.icon);
         temp_C.innerHTML = jsonval.temp_c + '<sup>o</sup>C';
         temp_f.innerHTML = jsonval.temp_f + '<sup>o</sup>F';
-        localtime.innerHTML = apival.location.localtime.split(" ")[0] + "<br>" + apival.location.localtime.split(" ")[1];
+        localdate.innerHTML = (date === 'localdate')? apival.location.localtime.split(" ")[0] : date;
+        localtime.innerHTML = (time === 'localtime')? apival.location.localtime.split(" ")[1] : time;
         weathertxt.innerHTML = jsonval.condition.text;
         humidity.innerHTML = 'Humidity: ' + jsonval.humidity + 'g/m<sup>3</sup>';
         windSpeed.innerHTML = 'Wind Speed: ' + jsonval.wind_kph + ' Km/h';
@@ -50,18 +51,6 @@ document.addEventListener('DOMContentLoaded', async ()=>{
     }
 
     showval(apival.current);
-
-    // icon.setAttribute('src', apival.current.condition.icon);
-    // temp_C.innerHTML = apival.current.temp_c + '<sup>o</sup>C';
-    // temp_f.innerHTML = apival.current.temp_f + '<sup>o</sup>F';
-    // localtime.innerHTML = apival.location.localtime.split(" ")[0] + "<br>" + apival.location.localtime.split(" ")[1];
-    // weathertxt.innerHTML = apival.current.condition.text;
-    // humidity.innerHTML = 'Humidity: ' + apival.current.humidity + 'g/m<sup>3</sup>';
-    // windSpeed.innerHTML = 'Wind Speed: ' + apival.current.wind_kph + ' Km/h';
-    // pressure.innerHTML = 'Pressure: ' + apival.current.pressure_mb + ' Millibar';
-    // uv.innerHTML = 'UV: ' + apival.current.uv + 'mW/cm<sup>2</sup>';
-
-    // console.log(apival.forecast.forecastday[0].hour.length);
 
     for(let i = 0; i<apival.forecast.forecastday[0].hour.length; i = i + 4){
         forecast.append(document.createElement('div'));
@@ -81,8 +70,7 @@ document.addEventListener('DOMContentLoaded', async ()=>{
     const hourly = document.querySelectorAll('.forecast-wrap div');
     for(let i = 0; i<hourly.length; i++){
         hourly[i].addEventListener('click', () => {
-            console.log(JSON.parse(hourly[i].getAttribute('data-val')));
-            showval(JSON.parse(hourly[i].getAttribute('data-val')));
+            showval(JSON.parse(hourly[i].getAttribute('data-val')), JSON.parse(hourly[i].getAttribute('data-val')).time.split(" ")[0], JSON.parse(hourly[i].getAttribute('data-val')).time.split(" ")[1]);
         })
     }
     // console.log(hourly);
@@ -90,14 +78,14 @@ document.addEventListener('DOMContentLoaded', async ()=>{
     freh.addEventListener('click',()=>{
         temp_f.style.display = "block";
         temp_C.style.display = 'none';
-        cel.style.color = "#777";
+        cel.style.color = "#c7aaaa";
         freh.style.color = "#fff";
     })
 
     cel.addEventListener('click',()=>{
         temp_f.style.display = "none";
         temp_C.style.display = 'block';
-        freh.style.color = "#777";
+        freh.style.color = "#c7aaaa";
         cel.style.color = "#fff";
     })
 })
